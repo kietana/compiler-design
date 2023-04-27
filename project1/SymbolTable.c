@@ -12,8 +12,10 @@ int hash (char *name) {
 }
 
 void create() {
+    symbolTable.counter = 0;
     for (int i = 0; i < MAX_TABLE_SIZE; i++) {
-        SymbolTable[i] = NULL;
+        symbolTable.table[i] = NULL;
+        symbolTable.order[i] = 0;
     }
 }
 
@@ -21,7 +23,7 @@ int lookup(char* name) {
     int index = hash(name);
     for (int i = 0; i < MAX_TABLE_SIZE; i++) {
         int try = (i + index) % MAX_TABLE_SIZE;
-        if (SymbolTable[try] != NULL && strcmp(SymbolTable[try]->idName, name) == 0) {
+        if (symbolTable.table[try] != NULL && strcmp(symbolTable.table[try]->idName, name) == 0) {
             return try;
         }
     }
@@ -33,12 +35,13 @@ int insert(char* name) {
     if (symPtr == NULL) return -1;
     strcpy(symPtr->idName, name);
     int index = hash(name);
+
     if (lookup(name) == -1) {
         for (int i = 0; i < MAX_TABLE_SIZE; i++) {
             int try = (i + index) % MAX_TABLE_SIZE;
-            if (SymbolTable[try] == NULL) { 
-                SymbolTable[try] = symPtr;
-                // printf("\n\nInserted %s at %d\n\n", name, try);
+            if (symbolTable.table[try] == NULL) { 
+                symbolTable.table[try] = symPtr;
+                symbolTable.order[symbolTable.counter++] = try;
                 return try;
             }
         }
@@ -48,11 +51,8 @@ int insert(char* name) {
 
 void dump() {
     for (int i = 0; i < MAX_TABLE_SIZE; i++) {
-        if (SymbolTable[i] != NULL) {
-            printf("%d: %s\n", i, SymbolTable[i]->idName);
+        if (symbolTable.table[symbolTable.order[i]] != NULL) {
+            printf("%d: %s\n", symbolTable.order[i], symbolTable.table[symbolTable.order[i]]->idName);
         }
-        // else {
-        //     printf("%d: %s\n", i, "NULL");
-        // }
     }
 }

@@ -5,10 +5,15 @@
 
 typedef struct {
     char idName[MAX_LINE_LENG];  // name of the identifier
-    int order;
 } Symbol;
 
-Symbol* SymbolTable[MAX_TABLE_SIZE]; // array of pointers to Symbol
+typedef struct {
+    Symbol* table[MAX_TABLE_SIZE]; // array of pointers to Symbol
+    int order[MAX_TABLE_SIZE]; // store the position in table array
+    int counter; // keep track of current index of order array
+} SymbolTable;
+
+SymbolTable symbolTable;
 
 int hash (char *name);
 void create();
