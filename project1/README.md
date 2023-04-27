@@ -113,8 +113,8 @@ Output should be:
 22:
 
 Symbol Table:
-40: add
 97: a
-98: b
 99: c
+40: add
+98: b
 ```
