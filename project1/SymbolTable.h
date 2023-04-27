@@ -1,9 +1,5 @@
 #ifndef SYMBOL_TABLE_H
 #define SYMBOL_TABLE_H
-
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
 #define MAX_LINE_LENG 256
 #define MAX_TABLE_SIZE 257
 

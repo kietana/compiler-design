@@ -1,4 +1,7 @@
 #include "SymbolTable.h"
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
 
 int hash (char *name) {
     int hashValue = 0;
