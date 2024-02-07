@@ -1,0 +1,15 @@
+Changes made on symboltable.h/symboltable.c
+- Add `argCount` in Symbol
+- Delete `hasValue` from Symbol struct
+- Modify Symbol struct to have `indexLoc` to store the index of local variable in local variable array
+- Add `idxCounter` in SymbolTable struct to keep track of index of local variable array
+
+Changes made on st.y
+- Create write file to write jasm
+- Add several lines in the rules action for codegen
+- Delete `comparison_op` non-terminal rule, directly make it in `expression` rule (ex: expression '<' expression)
+- Add  `init()` before opt_decs and `popTab()` after
+- Notice error in conditional statement where syntax error is issued when there is no `else`, make a new rule `opt_else`
+
+Create label.h/label.c:
+- As LabelHandler
